@@ -74,10 +74,16 @@ select {
   white-space: nowrap;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
 .icon-button {
   width: 30px;
   height: 30px;
-  margin-left: auto;
   border: 0;
   border-radius: 6px;
   color: #ffffff;
@@ -85,6 +91,16 @@ select {
   cursor: pointer;
   font-size: 20px;
   line-height: 1;
+}
+
+.icon-button svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
 }
 
 .icon-button:hover {

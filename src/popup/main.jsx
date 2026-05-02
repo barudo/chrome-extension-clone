@@ -87,6 +87,20 @@ function App() {
     dragState.current = null;
   };
 
+  const handleHeaderButtonPointerDown = (event) => {
+    event.stopPropagation();
+  };
+
+  const openOptionsPage = async () => {
+    const url = chrome.runtime.getURL("options/index.html");
+
+    try {
+      await chrome.tabs.create({ url });
+    } catch {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
   return (
     <main className="app-shell">
       <header
@@ -100,9 +114,33 @@ function App() {
           <strong>ChatGPT Summarize</strong>
           <span>{page.title}</span>
         </div>
-        <button className="icon-button" type="button" onClick={() => postToHost("CLOSE_POPUP")} aria-label="Close">
-          x
-        </button>
+        <div className="header-actions">
+          <button
+            className="icon-button"
+            type="button"
+            onPointerDown={handleHeaderButtonPointerDown}
+            onClick={openOptionsPage}
+            aria-label="Open options"
+            title="Open options"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
+              <path d="m19.4 15 .2-1.4 2-1.6-2-1.6-.2-1.4 1.2-2.2-2.8-1.6-1.4 1-1.4-.6L14.6 3h-3.2L11 5.6l-1.4.6-1.4-1-2.8 1.6L6.6 9l-.2 1.4-2 1.6 2 1.6.2 1.4-1.2 2.2 2.8 1.6 1.4-1 1.4.6.4 2.6h3.2l.4-2.6 1.4-.6 1.4 1 2.8-1.6L19.4 15Z" />
+            </svg>
+          </button>
+          <button
+            className="icon-button"
+            type="button"
+            onPointerDown={handleHeaderButtonPointerDown}
+            onClick={() => postToHost("CLOSE_POPUP")}
+            aria-label="Close"
+            title="Close"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
       </header>
 
       <nav className="tabs" aria-label="Extension views">

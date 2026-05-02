@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         popup: resolve(__dirname, "popup.html"),
+        "options/index": resolve(__dirname, "options/index.html"),
         welcome: resolve(__dirname, "welcome.html"),
         "content-script": resolve(__dirname, "src/content/content-script.js"),
         "service-worker": resolve(__dirname, "src/background/service-worker.js")
